@@ -1,0 +1,1 @@
+phoneSales.o: ../phoneSales.cpp
