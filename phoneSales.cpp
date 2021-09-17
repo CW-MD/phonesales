@@ -90,6 +90,20 @@ if(choice == 2){
     wirecharge = true;
     totalprice +=100;
 } 
+
+cout <<"You selected the following options: " <<endl;
+cout << "Chip: " << chip << endl;
+cout << "Camera: " << campixels << endl;
+cout << "Screen Resolution: " << screenres <<endl;
+cout << "Audio Type: " << dolbytype << endl;
+cout << "Battery Life: " << battlife << endl;
+cout << "Phone Weight: " << phonewt <<endl;
+cout << "Extra Ports?: " << ports <<endl;
+cout << "Operating System: " << os <<endl;
+cout << "Waterproof?: " << waterproof <<endl;
+cout << "Wireless Charging?: " << wirecharge <<endl;
+
+
 cout <<"Your phone will cost $" << totalprice << "\n";
 
 return 0;
