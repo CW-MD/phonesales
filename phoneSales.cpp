@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 
+
 int main(){
 
     //data vars
@@ -21,9 +22,19 @@ bool waterproof = false;
 bool wirecharge = false;
 const float BASEPRICE = 826.59;
 
+string fullName = "Ya Boi Chad";
+string userName = "Chedda";
+string userPass = "P@ssw0rd123";
+
     //working vars
 int choice = 0;
 float totalprice = BASEPRICE;
+bool isPassValid = false;
+int attempts = 0;
+int numPhones;
+string entPass;
+float grandTotal;
+char morePhones = 'x';
 
 //Base Model
 //chip = 32gz, cam = 1080p, res = 1080p, audio = DD, battery = 24h
@@ -31,65 +42,197 @@ float totalprice = BASEPRICE;
 
 cout << "Welcome to the custom phone system\n";
 
-cout << "Please choose the phone options. \n\n";
+do {
+    cout <<"Please enter your password:";
+    getline(cin, entPass);
+    if(entPass == userPass)
+    {isPassValid = true;}
+    else{
+        cout << "Invalid Password";
+        attempts++;
+    }
+    } while (attempts < 3 && !isPassValid);
+    
+        if(!isPassValid){
+            cout << "Number of attempts exceeded, program terminated!\n";
+            exit(0);
+        }
+    
+    
 
+
+do{
+
+cout << "Please choose the phone options. \n\n";
 cout << "Chip (1 - 64hz || 2 - 128hz)";
-cin >> choice;
-if(choice == 2){
+ cin >> choice;
+ switch (choice)
+ {
+ case 1:
+     chip = 64;
+     break;
+ 
+ case 2:
     chip = 128;
     totalprice +=25;
-}
+     break;
+default:
+    cout << "Invalid Entry \n";
+    cout << choice;
+ }
  cout << "Camera (1 - 1080p || 2 - 4k)";
 cin >> choice;
-if(choice == 2){
+
+switch (choice)
+ {
+ case 1:
+     campixels = 1080;
+     break;
+ 
+ case 2:
     campixels = 4000;
     totalprice +=200;
-} cout << "Screen (1 - 1080p || 2 - 4k)";
+     break;
+default:
+    cout << "Invalid Entry \n";
+    cout << choice;
+ }
+
+
+cout << "Screen (1 - 1080p || 2 - 4k)";
 cin >> choice;
-if(choice == 2){
+
+switch (choice)
+ {
+ case 1:
+     screenres = 1080;
+     break;
+ 
+ case 2:
     screenres = 4000;
     totalprice +=200;
-} cout << "Sound (1 - Dolby Digital || 2 - Dolby HD)";
+     break;
+default:
+    cout << "Invalid Entry \n";
+    cout << choice;
+ }
+
+ cout << "Sound (1 - Dolby Digital || 2 - Dolby HD)";
 cin >> choice;
-if(choice == 2){
-    dolbytype = "Dolby HD";
+
+
+switch (choice)
+ {
+ case 1:
+     dolbytype = "Dolby Digital";
+     break;
+ 
+ case 2:
+    dolbytype= "Dolby HD";
     totalprice +=50;
-} cout << "Chip (1 - 64hz || 2 - 128hz)";
-cin >> choice;
-if(choice == 2){
-    chip = 128;
-    totalprice +=25;
-} cout << "Battery Life (1 - 60hr || 2 - 120hr)";
-cin >> choice;
-if(choice == 2){
+     break;
+default:
+    cout << "Invalid Entry \n";
+    cout << choice;
+ }
+ cout << "Battery Life (1 - 60hr || 2 - 120hr)";
+ cin >> choice;
+ switch (choice)
+ {
+ case 1:
+     battlife = 60;
+     break;
+ 
+ case 2:
     battlife = 120;
     totalprice +=100;
-} cout << "phone weight (1 - 125g || 2 - 80g)";
+     break;
+default:
+    cout << "Invalid Entry \n";
+    cout << choice;
+ }
+ cout << "phone weight (1 - 125g || 2 - 80g)";
 cin >> choice;
-if(choice == 2){
+switch (choice)
+{
+case 1:
+    phonewt = 125;
+    break;
+
+case 2:
     phonewt = 80;
-    totalprice +=50;
-} cout << "Additional Ports? (1 - No || 2 - Yes)";
+    totalprice += 50;
+
+default:
+    break;
+}
+
+ cout << "Additional Ports? (1 - No || 2 - Yes)";
 cin >> choice;
-if(choice == 2){
+switch (choice)
+{
+case 1:
+    ports = false;
+    break;
+
+case 2:
     ports = true;
-    totalprice +=50;
-} cout << "OS (1 - Android || 2 - IOS)";
+    totalprice += 50;
+
+default:
+    break;
+}
+
+ cout << "OS (1 - Android || 2 - IOS)";
 cin >> choice;
-if(choice == 2){
+switch (choice)
+{
+case 1:
+    os = "Android";
+    break;
+
+case 2:
     os = "IOS";
-    totalprice +=50;
-} cout << "Waterproof? (1 - No || 2 - Yes)";
+    totalprice += 100;
+
+default:
+    break;
+}
+ cout << "Waterproof? (1 - No || 2 - Yes)";
 cin >> choice;
-if(choice == 2){
+switch (choice)
+{
+case 1:
+    waterproof = false;
+    break;
+
+case 2:
     waterproof = true;
-    totalprice +=100;
-} cout << "Wireless Charging? (1 - No || 2 - Yes)";
+    totalprice += 50;
+
+default:
+    break;
+}
+
+cout << "Wireless Charging? (1 - No || 2 - Yes)";
 cin >> choice;
-if(choice == 2){
+switch (choice)
+{
+case 1:
+    wirecharge = false;
+    break;
+
+case 2:
     wirecharge = true;
-    totalprice +=100;
-} 
+    totalprice += 100;
+
+default:
+    break;
+}
+
+cout << "How many phones would you like to order?:";
+cin >>numPhones;
+grandTotal = totalprice * numPhones;
 
 cout <<"You selected the following options: " <<endl;
 cout << "Chip: " << chip << endl;
@@ -103,8 +246,12 @@ cout << "Operating System: " << os <<endl;
 cout << "Waterproof?: " << waterproof <<endl;
 cout << "Wireless Charging?: " << wirecharge <<endl;
 
+cout <<"Your total is $" << grandTotal << " for " << numPhones << " phones" "\n";
 
-cout <<"Your phone will cost $" << totalprice << "\n";
-
+cout <<"Would you like to order more phones? (Y / N)" ;
+cin >> morePhones;
+}while(morePhones == 'Y' || morePhones == 'y');
 return 0;
 }
+
+
