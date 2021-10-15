@@ -4,12 +4,14 @@
 
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 
 int main(){
 
     //data vars
+int orderNum = 1000;
 int chip = 32;
 int campixels = 1080;
 int screenres = 1080;
@@ -22,9 +24,20 @@ bool waterproof = false;
 bool wirecharge = false;
 const float BASEPRICE = 826.59;
 
-string fullName = "Ya Boi Chad";
-string userName = "Chedda";
-string userPass = "P@ssw0rd123";
+    //users
+const int CSIZE = 3;
+
+string fullNames[CSIZE] = {"Ya Boi Chad", "Pillsbury Doughboy", "Anotha One"};
+string userNames[CSIZE] = {"Chedda@gmail.com", "Pdough@gmail.com", "An1@gmail.com"};
+string userPwds[CSIZE] = {"P@ssw0rd123", "doughPass", "An0thaP@ss"};
+
+int ci = -1;
+
+    //Sold Phones
+    const int  OSIZE = 10;
+    int sales[OSIZE];
+    float totals[OSIZE];
+    int oi = 0;
 
     //working vars
 int choice = 0;
@@ -45,12 +58,19 @@ cout << "Welcome to the custom phone system\n";
 do {
     cout <<"Please enter your password:";
     getline(cin, entPass);
-    if(entPass == userPass)
-    {isPassValid = true;}
-    else{
-        cout << "Invalid Password";
+
+    for(int i = 0; i < CSIZE; i++){
+        if(entPass == userPwds[i])
+        {isPassValid = true;
+        ci = i;
+        }
+    }
+    
+    if(!isPassValid){
+        cout << "Invalid Password" <<endl;
         attempts++;
     }
+    
     } while (attempts < 3 && !isPassValid);
     
         if(!isPassValid){
@@ -62,7 +82,7 @@ do {
 
 
 do{
-
+    totalprice = BASEPRICE;
 cout << "Please choose the phone options. \n\n";
 cout << "Chip (1 - 64hz || 2 - 128hz)";
  cin >> choice;
@@ -233,8 +253,11 @@ default:
 cout << "How many phones would you like to order?:";
 cin >>numPhones;
 grandTotal = totalprice * numPhones;
+sales[oi] = orderNum++;
+totals[oi] = grandTotal;
 
-cout <<"You selected the following options: " <<endl;
+
+cout <<"You selected the following options for order #: " <<(orderNum-1) <<endl;
 cout << "Chip: " << chip << endl;
 cout << "Camera: " << campixels << endl;
 cout << "Screen Resolution: " << screenres <<endl;
@@ -247,11 +270,19 @@ cout << "Waterproof?: " << waterproof <<endl;
 cout << "Wireless Charging?: " << wirecharge <<endl;
 
 cout <<"Your total is $" << grandTotal << " for " << numPhones << " phones" "\n";
+oi++;
 
 cout <<"Would you like to order more phones? (Y / N)" ;
 cin >> morePhones;
 }while(morePhones == 'Y' || morePhones == 'y');
+
+//summary ofall orders
+cout << "\n************************************************"<< endl;
+cout << "Order List for " << fullNames[ci] <<endl;
+for(int i =0; i < oi; i++){
+    cout << "Order # "<< sales[i] << " Total: $" << totals[i]  << " for " << numPhones << " phones" <<endl;
+}
+cout << "Grand Total $" << setprecision(2) <<grandTotal <<endl;
+cout << "\n************************************************"<< endl;
 return 0;
 }
-
-
